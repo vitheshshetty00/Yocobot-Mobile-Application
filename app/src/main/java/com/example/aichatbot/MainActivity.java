@@ -1,10 +1,13 @@
 package com.example.aichatbot;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         messageList =  new ArrayList<>();
+        // title is set here
+
+
+
+        // probable code for chaning color
+
+
 
         recyclerView = findViewById(R.id.recyclerView);
         welcomeTextView = findViewById(R.id.tvWelcome);
@@ -83,11 +93,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void addResponse(String response) {
+        messageList.remove(messageList.size()-1);
         addToChat(response, Message.SENT_BY_BOT);
+
     }
 
     void  callApi(String message) {
 
+        addToChat("Typing...",Message.SENT_BY_BOT);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("model","text-davinci-003");
