@@ -3,12 +3,16 @@ package com.example.aichatbot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -37,10 +41,13 @@ public class MainActivity extends AppCompatActivity {
     ImageButton sendButton;
     List<Message> messageList;
     MessageAdapter messageAdapter;
+    Button imageGen ;
+
     public static final MediaType JSON
             = MediaType.get("application/json; charset=utf-8");
 
     OkHttpClient client = new OkHttpClient();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +61,18 @@ public class MainActivity extends AppCompatActivity {
         welcomeTextView = findViewById(R.id.tvWelcome);
         messageEditText = findViewById(R.id.etMessage);
         sendButton = findViewById(R.id.btnSend);
+        imageGen = findViewById(R.id.imageGen);
 
         messageAdapter = new MessageAdapter(messageList);
         recyclerView.setAdapter(messageAdapter);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setStackFromEnd(true);
         recyclerView.setLayoutManager(llm);
+
+        imageGen.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ImageGenerator.class);
+            startActivity(intent);
+        });
 
         sendButton.setOnClickListener(v -> {
             String query = messageEditText.getText().toString().trim();

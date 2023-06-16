@@ -38,6 +38,7 @@ public class MessageAdapter extends  RecyclerView.Adapter<MessageAdapter.MyViewH
             holder.leftTextView.setText(message.getMessage());
         }
 
+
     }
 
     @Override
