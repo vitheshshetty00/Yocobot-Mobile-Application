@@ -7,7 +7,6 @@ public class Message {
     String message;
     String sentBy;
 
-
     public String getMessage() {
         return message;
     }

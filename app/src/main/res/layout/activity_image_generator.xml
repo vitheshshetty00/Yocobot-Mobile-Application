@@ -4,64 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C3C3C3"
     tools:context=".MainActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        >
+        android:background="@color/black">
+
         <Button
             android:id="@+id/btnChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
 
-            android:textColor="@color/white"
+            android:text="Try Chat Bot"
 
-            android:text="Try Chat Bot" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="YOCOBOT"
-            android:textSize="28dp"
-            android:textStyle="bold"
             android:textColor="#9E9D9D"
-            />
+            android:textSize="28dp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
+
     <RelativeLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:padding="8dp"
-        android:id="@+id/bottomLayout">
+        android:padding="8dp">
 
         <EditText
+            android:id="@+id/etPromt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etMessage"
             android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/btnGenerateImage"
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="#303030"
             android:hint="Write Here ..."
             android:padding="16dp"
-            android:layout_toLeftOf="@+id/btnGenerateImage"
-            android:backgroundTint="#303030"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:background="@drawable/rounded_corner"
-            />
+            android:textColorHint="@color/white" />
+
         <ImageButton
+            android:id="@+id/btnGenerateImage"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:id="@+id/btnGenerateImage"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
-            android:padding="8dp"
-            android:src="@drawable/baseline_send_24"
             android:background="?attr/selectableItemBackgroundBorderless"
-            />
+            android:padding="8dp"
+            android:src="@drawable/baseline_send_24" />
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="80dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:id="@+id/PlaceHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@drawable/PlaceHolder" />
+        </androidx.cardview.widget.CardView>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loding">
+
+        </com.airbnb.lottie.LottieAnimationView>
+    </RelativeLayout>
+
 </RelativeLayout>
