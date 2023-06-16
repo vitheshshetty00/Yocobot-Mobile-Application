@@ -47,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         messageList =  new ArrayList<>();
-        // title is set here
-
-
-
-        // probable code for chaning color
 
 
 

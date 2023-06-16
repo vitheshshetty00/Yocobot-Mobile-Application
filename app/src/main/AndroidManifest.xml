@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AiChatBot"
         tools:targetApi="31">
         <activity
+            android:name=".ImageGenerator"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
