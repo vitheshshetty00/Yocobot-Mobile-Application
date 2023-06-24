@@ -63,6 +63,10 @@ public class ImageGenerator extends AppCompatActivity {
             startActivity(new Intent(ImageGenerator.this, MainActivity.class));
         });
 
+        findViewById(R.id.backBtn).setOnClickListener(v -> {
+            startActivity(new Intent(ImageGenerator.this, MenuActivity.class));
+        });
+
         btnGenerateImage.setOnClickListener(v -> {
             String text = etPrompt.getText().toString().trim();
 
@@ -95,6 +99,8 @@ public class ImageGenerator extends AppCompatActivity {
                 Toast.makeText(ImageGenerator.this,"Request failed",Toast.LENGTH_SHORT).show();
 
             }
+
+
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {

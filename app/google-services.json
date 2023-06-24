@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1058789829458",
+    "project_id": "yocobot-c578b",
+    "storage_bucket": "yocobot-c578b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058789829458:android:0f0318a6cffd954cbde88b",
+        "android_client_info": {
+          "package_name": "com.example.aichatbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058789829458-bfnnmchjcjetgbue2s1kcl2srn9tab8h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aichatbot",
+            "certificate_hash": "c628a7a74c08d87af23b2af520ff1b7b64d9ece0"
+          }
+        },
+        {
+          "client_id": "1058789829458-sv1hl11ddanr94pg4pn2tdtpjhb56une.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj5eZ2Ap29nCMuOV5jUzAkniyOTzkksEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058789829458-sv1hl11ddanr94pg4pn2tdtpjhb56une.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

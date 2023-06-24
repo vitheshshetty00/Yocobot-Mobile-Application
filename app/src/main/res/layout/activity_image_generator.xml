@@ -4,31 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C3C3C3"
+
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black">
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/baseline_keyboard_return_24" />
 
         <Button
             android:id="@+id/btnChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:background="@color/black"
 
             android:text="Try Chat Bot"
 
             android:textColor="@color/white" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YOCOBOT"
-            android:textColor="#9E9D9D"
-            android:textSize="28dp"
-            android:textStyle="bold" />
+
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -46,7 +51,7 @@
             android:layout_centerInParent="true"
             android:layout_toLeftOf="@+id/btnGenerateImage"
             android:background="@drawable/rounded_corner"
-            android:backgroundTint="#303030"
+            android:backgroundTint="#1E1D1D"
             android:hint="Write Here ..."
             android:padding="16dp"
             android:textColor="@color/white"
@@ -87,7 +92,7 @@
                 android:id="@+id/PlaceHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@drawable/PlaceHolder" />
+                android:src="@drawable/placeholder" />
         </androidx.cardview.widget.CardView>
 
         <com.airbnb.lottie.LottieAnimationView

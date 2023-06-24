@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView welcomeTextView;
     EditText messageEditText;
-    ImageButton sendButton;
+    ImageButton sendButton,backBtn;
     List<Message> messageList;
     MessageAdapter messageAdapter;
     Button imageGen ;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         welcomeTextView = findViewById(R.id.tvWelcome);
         messageEditText = findViewById(R.id.etMessage);
         sendButton = findViewById(R.id.btnSend);
+        backBtn = findViewById(R.id.backBtn);
         imageGen = findViewById(R.id.imageGen);
 
         messageAdapter = new MessageAdapter(messageList);
@@ -71,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
         imageGen.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ImageGenerator.class);
+            startActivity(intent);
+        });
+
+        backBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
             startActivity(intent);
         });
 
