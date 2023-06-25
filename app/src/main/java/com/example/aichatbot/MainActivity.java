@@ -18,6 +18,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView welcomeTextView;
     EditText messageEditText;
-    ImageButton sendButton,backBtn;
+    ImageButton sendButton,backBtn,clearBtn;
     List<Message> messageList;
     MessageAdapter messageAdapter;
-    Button imageGen ;
+
+
+    String userId;
+    DatabaseReference chatsRef;
 
     public static final MediaType JSON
             = MediaType.get("application/json; charset=utf-8");
@@ -55,6 +66,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         messageList =  new ArrayList<>();
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            userId = user.getUid();
+        }else {
+            Intent intent = new Intent(MainActivity.this, OnBoarding.class);
+            startActivity(intent);
+        }
+
+        chatsRef = database.getReference("chats").child(userId);
+
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -62,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         messageEditText = findViewById(R.id.etMessage);
         sendButton = findViewById(R.id.btnSend);
         backBtn = findViewById(R.id.backBtn);
-        imageGen = findViewById(R.id.imageGen);
+
+        clearBtn = findViewById(R.id.clearBtn);
 
         messageAdapter = new MessageAdapter(messageList);
         recyclerView.setAdapter(messageAdapter);
@@ -70,9 +94,15 @@ public class MainActivity extends AppCompatActivity {
         llm.setStackFromEnd(true);
         recyclerView.setLayoutManager(llm);
 
-        imageGen.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ImageGenerator.class);
-            startActivity(intent);
+        retrieveChat();
+
+        clearBtn.setOnClickListener(v -> {
+
+            chatsRef.removeValue();
+
+            messageList.clear();
+            messageAdapter.notifyDataSetChanged();
+            recyclerView.smoothScrollToPosition(messageList.size());
         });
 
         backBtn.setOnClickListener(v -> {
@@ -93,6 +123,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    void retrieveChat() {
+        chatsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                welcomeTextView.setVisibility(TextView.GONE);
+                messageList.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
+                        Message message = messageSnapshot.getValue(Message.class);
+                        messageList.add(message);
+                    }
+                    messageAdapter.notifyDataSetChanged();
+                    recyclerView.smoothScrollToPosition(messageList.size() - 1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                welcomeTextView.setVisibility(TextView.VISIBLE);
+            }
+        });
+    }
+
     void addToChat(String message, String sentBy) {
         runOnUiThread(new Runnable() {
             @Override
@@ -101,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 messageList.add(m);
                 messageAdapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(messageList.size() - 1);
+
+                chatsRef.push().setValue(m);
             }
         });
 
@@ -112,9 +168,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     void  callApi(String message) {
 
-        addToChat("Typing...",Message.SENT_BY_BOT);
+        Message m = new Message("Typing...", Message.SENT_BY_BOT);
+        messageList.add(m);
+        messageAdapter.notifyDataSetChanged();
+        recyclerView.smoothScrollToPosition(messageList.size() - 1);
+
+//        addToChat("Typing...",Message.SENT_BY_BOT);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("model","text-davinci-003");

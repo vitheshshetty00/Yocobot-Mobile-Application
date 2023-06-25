@@ -20,16 +20,18 @@
             android:scaleY="1.2"
             android:layout_gravity="start"
             app:srcCompat="@drawable/baseline_keyboard_return_24" />
-        <Button
-            android:id="@+id/imageGen"
+
+        <ImageButton
+            android:id="@+id/clearBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:layout_marginEnd="20dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:layout_gravity="end"
-            android:background="@color/black"
+            app:srcCompat="@drawable/baseline_delete_sweep_24" />
 
-            android:textColor="@color/white"
-
-            android:text="Try Image Generator" />
 
 
 
