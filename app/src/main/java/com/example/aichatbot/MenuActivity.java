@@ -44,5 +44,14 @@ public class MenuActivity extends AppCompatActivity {
 
                 }
         );
+
+        findViewById(R.id.btnVideoCard).setOnClickListener(
+                v -> {
+
+                    startActivity(new Intent(MenuActivity.this, VideoGenerator.class));
+                    finish();
+
+                }
+        );
     }
 }

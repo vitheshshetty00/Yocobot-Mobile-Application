@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:visibility="gone">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black">
+
         <ImageButton
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:background="?android:selectableItemBackground"
             android:scaleX="1.2"
             android:scaleY="1.2"
-            android:layout_gravity="start"
             app:srcCompat="@drawable/baseline_keyboard_return_24" />
 
         <Button
@@ -32,7 +34,6 @@
             android:text="Try Chat Bot"
 
             android:textColor="@color/white" />
-
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -49,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toLeftOf="@+id/btnGenerateImage"
+            android:layout_toLeftOf="@+id/btnGenerateVideo"
             android:background="@drawable/rounded_corner"
             android:backgroundTint="#1E1D1D"
             android:hint="Write Here ..."
@@ -58,7 +59,7 @@
             android:textColorHint="@color/white" />
 
         <ImageButton
-            android:id="@+id/btnGenerateImage"
+            android:id="@+id/btnGenerateVideo"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
@@ -88,19 +89,23 @@
             android:visibility="gone"
             app:cardCornerRadius="10dp">
 
-            <ImageView
+            <VideoView
                 android:id="@+id/PlaceHolder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/placeholder" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleY="1.9"
+                android:scaleX="1.9"
+
+                 />
         </androidx.cardview.widget.CardView>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
             app:lottie_autoPlay="true"
 
             app:lottie_loop="true"

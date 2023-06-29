@@ -44,7 +44,7 @@ public class ImageGenerator extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
 
     String imageUrl ;
-    String fileName ="code";
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class ImageGenerator extends AppCompatActivity {
             String text = etPrompt.getText().toString().trim();
 
             callApi(text);
+            etPrompt.setText("");
         });
     }
 
