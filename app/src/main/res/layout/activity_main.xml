@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/my_dark_primary"
     tools:context=".MainActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -57,10 +58,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="#1E1D1D"
+
         android:id="@+id/bottomLayout">
+
+
+
 
         <EditText
             android:id="@+id/etMessage"
@@ -75,13 +82,13 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
         <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btnSend"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
-            android:padding="8dp"
+            android:padding="4dp"
             android:src="@drawable/baseline_send_24"
             android:background="?attr/selectableItemBackgroundBorderless"
             />

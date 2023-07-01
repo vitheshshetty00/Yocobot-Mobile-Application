@@ -29,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String TAG = "TAG";
     EditText mFullName,mEmail,mPassword;
     Button mRegisterBtn;
-
     FirebaseFirestore fstore;
     String userID;
     FirebaseAuth fAuth;

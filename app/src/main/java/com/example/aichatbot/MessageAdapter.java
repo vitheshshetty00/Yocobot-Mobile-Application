@@ -3,6 +3,8 @@ package com.example.aichatbot;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class MessageAdapter extends  RecyclerView.Adapter<MessageAdapter.MyViewHolder> {
     List<Message> messageList;
+
     public MessageAdapter(List<Message> messageList) {
         this.messageList = messageList;
 
@@ -23,6 +26,7 @@ public class MessageAdapter extends  RecyclerView.Adapter<MessageAdapter.MyViewH
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View chatView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item,null);
         return new MyViewHolder(chatView);
+
     }
 
     @Override
@@ -39,6 +43,8 @@ public class MessageAdapter extends  RecyclerView.Adapter<MessageAdapter.MyViewH
         }
 
 
+
+
     }
 
     @Override
@@ -49,12 +55,26 @@ public class MessageAdapter extends  RecyclerView.Adapter<MessageAdapter.MyViewH
     public  class  MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout  leftChatLayout, rightChatLayout;
         TextView leftTextView, rightTextView;
+        ImageButton btnCopy;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             leftChatLayout = itemView.findViewById(R.id.llLeftChat);
             rightChatLayout = itemView.findViewById(R.id.llRightChat);
             leftTextView = itemView.findViewById(R.id.tvLeftChat);
             rightTextView = itemView.findViewById(R.id.tvRightChat);
+
+            btnCopy = itemView.findViewById(R.id.btnCopy);
+
+            btnCopy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = leftTextView.getText().toString();
+                    //Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
+                    android.content.ClipboardManager clipboard = (android.content.ClipboardManager) v.getContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+                    android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+                    clipboard.setPrimaryClip(clip);
+                }
+            });
         }
     }
 }

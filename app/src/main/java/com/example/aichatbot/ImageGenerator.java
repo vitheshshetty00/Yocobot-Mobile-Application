@@ -31,6 +31,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ImageGenerator extends AppCompatActivity {
+    private static final String API_KEY = "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";
     Button btnChat ;
     EditText  etPrompt;
     ImageButton btnGenerateImage;
@@ -90,7 +91,7 @@ public class ImageGenerator extends AppCompatActivity {
         RequestBody body = RequestBody.create(object.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/images/generations")
-                .header("Authorization","Bearer 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")
+                .header("Authorization","Bearer "+API_KEY)
                 .post(body)
                 .build();
 

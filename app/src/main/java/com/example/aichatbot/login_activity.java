@@ -32,7 +32,6 @@ public class login_activity extends AppCompatActivity {
     Button mLoginBtn, mGoogleLogin;
     FirebaseAuth fAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

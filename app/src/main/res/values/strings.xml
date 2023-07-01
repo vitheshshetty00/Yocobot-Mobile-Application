@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ai Chat Bot</string>
+    <string name="app_name">Yoco Bot</string>
     <string name="title_activity_login">login_activity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

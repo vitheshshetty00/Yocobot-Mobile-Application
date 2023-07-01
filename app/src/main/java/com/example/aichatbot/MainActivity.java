@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.grpc.android.BuildConfig;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -43,10 +46,11 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String API_KEY = "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";
     RecyclerView recyclerView;
     TextView welcomeTextView;
     EditText messageEditText;
-    ImageButton sendButton,backBtn,clearBtn;
+    ImageButton sendButton,backBtn,clearBtn,copyBtn;
     List<Message> messageList;
     MessageAdapter messageAdapter;
 
@@ -58,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
             = MediaType.get("application/json; charset=utf-8");
 
     OkHttpClient client = new OkHttpClient();
+
+
+
 
 
     @Override
@@ -86,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.btnSend);
         backBtn = findViewById(R.id.backBtn);
 
+
+
         clearBtn = findViewById(R.id.clearBtn);
 
         messageAdapter = new MessageAdapter(messageList);
@@ -104,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
             messageAdapter.notifyDataSetChanged();
             recyclerView.smoothScrollToPosition(messageList.size());
         });
+
+
 
         backBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MenuActivity.class);
@@ -177,11 +188,20 @@ public class MainActivity extends AppCompatActivity {
         messageAdapter.notifyDataSetChanged();
         recyclerView.smoothScrollToPosition(messageList.size() - 1);
 
+//        convert messegeList to string
+        StringBuilder sb = new StringBuilder();
+        for (Message m1 : messageList) {
+            sb.append(m1.getMessage());
+            sb.append("\n");
+        }
+        String chat = sb.toString();
+        chat = chat.substring(0, chat.length() - 1);
+
 //        addToChat("Typing...",Message.SENT_BY_BOT);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("model","text-davinci-003");
-            jsonBody.put("prompt",message);
+            jsonBody.put("prompt",chat);
             jsonBody.put("max_tokens",1000);
             jsonBody.put("temperature",0);
         } catch (JSONException e) {
@@ -191,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization","Bearer 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")
+                .header("Authorization", "Bearer " + API_KEY)
                 .post(body)
                 .build();
 
